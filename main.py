@@ -71,3 +71,35 @@ def deleteStudent(student_id):
     print("Student deleted successfully.")
     cur.close()
     conn.close()
+
+
+def main():
+    init_db()
+    while True:
+        print("\nAvailable commands: get, add, update, delete, exit")
+        command = input("Enter command: ").strip().lower()
+
+        if command == "get":
+            getAllStudents()
+        elif command == "add":
+            first_name = input("Enter first name: ")
+            last_name = input("Enter last name: ")
+            email = input("Enter email: ")
+            enrollment_date = input("Enter enrollment date (YYYY-MM-DD): ")
+            addStudent(first_name, last_name, email, enrollment_date)
+        elif command == "update":
+            student_id = int(input("Enter student ID to update email: "))
+            new_email = input("Enter new email: ")
+            updateStudentEmail(student_id, new_email)
+        elif command == "delete":
+            student_id = int(input("Enter student ID to delete: "))
+            deleteStudent(student_id)
+        elif command == "exit":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid command!")
+
+
+if __name__ == "__main__":
+    main()
